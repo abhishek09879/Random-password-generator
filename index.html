@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random password Generator </title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+<div class="containere ">
+<h1> Generate a <br>Random Password </h1>
+<div class="display">
+    <input type="text" id="password" placeholder="password">
+    <img src="img.jpg" alt="copy icon not found ">
+</div>
+<button id="generateBtn">Generate Password</button>
+<script>
+
+    const passwordBox = document.getElementById('password');
+    const length = 20;
+
+    const UPPERCASE_CHAR_CODES = arrayFromLowToHigh(65, 90);
+    const LOWERCASE_CHAR_CODES = arrayFromLowToHigh(97, 122);
+    const NUMBER_CHAR_CODES = arrayFromLowToHigh(48, 57);
+    const SYMBOL_CHAR_CODES = arrayFromLowToHigh(33, 47);
+
+    const allcharactercodes = UPPERCASE_CHAR_CODES
+        .concat(LOWERCASE_CHAR_CODES)
+        .concat(NUMBER_CHAR_CODES)
+        .concat(SYMBOL_CHAR_CODES);
+
+    function generatePassword() {
+        let password = "";
+        password += String.fromCharCode(UPPERCASE_CHAR_CODES[Math.floor(Math.random() * UPPERCASE_CHAR_CODES.length)]);
+        password += String.fromCharCode(LOWERCASE_CHAR_CODES[Math.floor(Math.random() * LOWERCASE_CHAR_CODES.length)]);
+        password += String.fromCharCode(NUMBER_CHAR_CODES[Math.floor(Math.random() * NUMBER_CHAR_CODES.length)]);
+        password += String.fromCharCode(SYMBOL_CHAR_CODES[Math.floor(Math.random() * SYMBOL_CHAR_CODES.length)]);
+        for (let i = password.length; i < length; i++) {
+            password += String.fromCharCode(allcharactercodes[Math.floor(Math.random() * allcharactercodes.length)]);
+        }
+        passwordBox.value = password;
+    }
+
+    function arrayFromLowToHigh(low, high) {
+        const array = [];
+        for (let i = low; i <= high; i++) {
+            array.push(i);
+        }
+        return array;
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', generatePassword);
+    
+</script>
+</body>
+</html>
